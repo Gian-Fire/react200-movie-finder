@@ -29,14 +29,15 @@ export default class MovieSearchContainer extends Component {
           className='jumbotron bg-dark text-center text-white'
           style={{ opacity: .9 }}
         >
-          <h1>Movie Finder</h1>
+          <h1 id='appName' >Movie Finder</h1>
         </div>
 
         <div id='searchBar'>
           <nav className="navbar navbar-dark bg-dark">
             <form className="form-inline">
               <input 
-                className="form-control d-inline w-70 bg-dark text-white border-secondary" 
+                className="form-control d-inline w-70 bg-dark text-white border-secondary"
+                id='searchInput'
                 type="search" 
                 placeholder="Search a movie" 
                 aria-label="Search"
@@ -45,6 +46,7 @@ export default class MovieSearchContainer extends Component {
               />
               <button 
                 className="btn btn-outline-success my-2 my-sm-0" 
+                id='searchButton'
                 type="button"
                 onClick={ this.handleSearch }
               >
@@ -58,6 +60,7 @@ export default class MovieSearchContainer extends Component {
           return (
             <div 
               className="card flex-row flex-wrap bg-dark text-white"
+              id='movieList'
               style={{ marginTop: 20 }}
               key={ i }
             >

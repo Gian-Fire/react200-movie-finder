@@ -13,24 +13,62 @@ app.use(express.static(path.join(__dirname, '/../dist')));
 
 app.listen(8888);
 
-const url = 'http://localhost:8888';
+const searchPage = 'http://localhost:8888';
+// const moreInfo = 'http://localhost:8888/movie/';
 
 
-describe('express', () => {
+describe('express / route ', () => {
   beforeEach(() => {
     nightmare = new Nightmare();
   });
 
+  it('/ route returns the correct status code', () => axios.get(searchPage)
+    .then(response => expect(response.status === 200))
+  );
+
   it('should have the correct page title', () =>
     nightmare
-      .goto(url)
-      .evaluate(() => document.querySelector('body').innerText)
+      .goto(searchPage)
+      .evaluate(() => document.getElementById('appName').innerText)
       .end()
       .then((text) => {
-        expect(text).to.contain('Movie Finder');
+        expect(text).to.equal('Movie Finder');
       })
   );
 
-  it('returns the correct status code', () => axios.get(url)
-    .then(response => expect(response.status === 200)));
+  it('should have search input', () => 
+    nightmare
+      .goto(searchPage)
+      .evaluate(() => document.querySelector('body').innerHTML)
+      .end()
+      .then((text) => {
+        expect(text).to.contain('input');
+      })
+  );
+
+  it('should have button element', () => 
+    nightmare
+      .goto(searchPage)
+      .evaluate(() => document.querySelector('body').innerHTML)
+      .end()
+      .then((text) => {
+        expect(text).to.contain('button');
+    })
+  );
+
+  // it('should search movie', () => 
+  //   nightmare
+  //     .goto(searchPage)
+  //     .type('#searchInput', 'Avengers')
+  //     .click('#searchButton')
+  //     .wait(2000)
+  //     .evaluate(() => document.get('#movieList'))
+  //     .end()
+  //     .then((list) => {
+  //       expect(list).to.contain('Avenegers');
+  //       done();
+  //     })
+  //     .catch((err) => console.log(err))
+  // );
+
 });
