@@ -1,4 +1,4 @@
-## Gian Delprado's Portfolio
+## Movie Finder App
 
 Welcome to the movie Finder app!
 
